@@ -2,7 +2,7 @@ using System;
 
 namespace foodapp
 {
-    public class WeatherForecast
+    public class GroceryList
     {
         public DateTime Date { get; set; }
 
