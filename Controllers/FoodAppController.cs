@@ -18,10 +18,22 @@ namespace foodapp.Controllers
             _logger = logger;
         }
 
-/*         [HttpGet]
+        static List<GroceryList> AllItems = new List<GroceryList>
+        {
+            
+        };
+
+        [HttpGet("all")]
         public IEnumerable<GroceryList> Get()
         {
+            return AllItems;
+        }
 
-        } */
+        [HttpPost("add")]
+        public void add(GroceryList g)
+        {
+            g.id = AllItems.Count + 1;
+            AllItems.Add(g);
+        }
     }
 }
