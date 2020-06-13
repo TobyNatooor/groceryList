@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace foodapp.Controllers
 {
@@ -13,27 +15,31 @@ namespace foodapp.Controllers
     {
         private readonly ILogger<GroceryListController> _logger;
 
-        public GroceryListController(ILogger<GroceryListController> logger)
+        public GroceryListController(ILogger<GroceryListController> logger, IHostingEnvironment env)
         {
             _logger = logger;
+            Data = new DataSave(Path.Combine(env.WebRootPath, "Data.Text"));
         }
 
-        static List<GroceryList> AllItems = new List<GroceryList>
-        {
-            
-        };
+        DataSave Data;
 
         [HttpGet("all")]
         public IEnumerable<GroceryList> Get()
         {
-            return AllItems;
+            return Data.GetGroceryList();
         }
 
         [HttpPost("add")]
         public void add(GroceryList g)
         {
-            g.id = AllItems.Count + 1;
-            AllItems.Add(g);
+
+            Data.AddItem(g);
+        }
+
+         [HttpPost("delete")]
+        public void delete(GroceryList g)
+        {
+            Data.DeleteItem(g.id);
         }
     }
 }

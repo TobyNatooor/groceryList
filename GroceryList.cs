@@ -4,7 +4,7 @@ namespace foodapp
 {
     public class GroceryList
     {
-        public int id { get; set; }
+        public Guid id { get; set; }
         public string item { get; set; }
     }
 }
