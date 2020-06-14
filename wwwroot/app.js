@@ -13,16 +13,28 @@ function Delete(x) {
 }
 
 button.addEventListener('click', () => {
-    let groceryItem = { item: 'unknown', id: '00000000-0000-0000-0000-000000000000' }
-    groceryItem.item = input.value;
-
-    fetch('/GroceryList/add', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(groceryItem),
-    })
-        .then(x => { update() })
+    addToList()
 })
+document.addEventListener('keydown', () => {
+    if (event.keyCode == 13) {
+        addToList()
+    }
+})
+
+function addToList() {
+    if (input.value != '') {
+        let groceryItem = { item: 'unknown', id: '00000000-0000-0000-0000-000000000000' }
+        groceryItem.item = input.value;
+        input.value = '';
+
+        fetch('/GroceryList/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(groceryItem),
+        })
+            .then(x => { update() })
+    }
+}
 
 function update() {
     fetch('/GroceryList/all')
