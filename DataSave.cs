@@ -9,7 +9,8 @@ public class DataSave
     public DataSave(string FileName)
     {
         F = FileName;
-        if (!File.Exists(FileName)) {
+        if (!File.Exists(FileName))
+        {
             Clear();
         }
     }
@@ -39,34 +40,18 @@ public class DataSave
     }
     public void DeleteItem(Guid id)
     {
-    
+
         var all = GetGroceryList();
 
         Clear();
 
-        foreach(var e in all)
+        foreach (var e in all)
         {
             if (e.id != id)
             {
-            AddItem(e);
+                AddItem(e);
 
             }
         }
-
-
-        /*
-        var All = new List<string>();
-        var AllLines = File.ReadAllLines(F);
-
-        for (var i = 0; i < AllLines.Length; i += 2)
-        {
-            var Grocery = new GroceryList { id = new Guid(AllLines[i]), item = AllLines[i + 1] };
-            if (Grocery.id != id)
-            {
-                All.Add(id);
-            }
-        }
-        File.WriteAllLines(F, All.ToArray());
-        */
     }
 }

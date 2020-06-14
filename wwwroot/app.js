@@ -13,7 +13,6 @@ function Delete(x) {
 }
 
 button.addEventListener('click', () => {
-
     let groceryItem = { item: 'unknown', id: '00000000-0000-0000-0000-000000000000' }
     groceryItem.item = input.value;
 
@@ -32,17 +31,11 @@ function update() {
             console.log(data)
             list.innerHTML = '';
             data.forEach(d => {
-                list.innerHTML += `<li id= ${d.id}>${d.item}<button onclick=Delete("${d.id}")>Slet</button></li>`
-
+                list.innerHTML +=
+                    `<div class="sameLine"><li class="flex-item" id= ${d.id}>${d.item}</li> 
+                    <button class="flex-item" onclick=Delete("${d.id}")>Delete</button></div>`
             })
         })
 }
-
 update();
 
-
-/* forEach.ArrayOf  {
-    document.querySelector('#' + ).addEventListener('click', () => {
-
-    })
-} */
