@@ -28,6 +28,6 @@ button {
     width: 25%;
 }
 
-.sameLine:nth-child(even) {
+.flex-item:nth-child(even) {
     background-color: lightgray;
 }

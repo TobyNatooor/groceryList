@@ -3,7 +3,7 @@ let list = document.querySelector('#list')
 let button = document.querySelector('#button')
 let input = document.querySelector('#input')
 
-function Delete(x) {
+function kill(x) {
     fetch('/GroceryList/delete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -11,6 +11,7 @@ function Delete(x) {
     })
         .then(x => { update() })
 }
+
 
 button.addEventListener('click', () => {
     addToList()
@@ -20,6 +21,22 @@ document.addEventListener('keydown', () => {
         addToList()
     }
 })
+list.addEventListener("click", (e) => {
+    if (document.querySelector(`#${CSS.escape(e.target.id)}`).style.color == 'red') {
+        document.querySelector(`#${CSS.escape(e.target.id)}`).style.color = 'black'
+    } else {
+        document.querySelector(`#${CSS.escape(e.target.id)}`).style.color = 'red'
+    }
+});
+document.querySelector('#delete').addEventListener("click", () => {
+    list.childNodes.forEach(child => {
+        if (child.style.color == 'red') {
+            kill(child.id)
+            update();
+        }
+    })
+});
+
 
 function addToList() {
     if (input.value != '') {
@@ -32,7 +49,7 @@ function addToList() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(groceryItem),
         })
-            .then(x => { update() })
+            .then(x => update())
     }
 }
 
@@ -40,14 +57,10 @@ function update() {
     fetch('/GroceryList/all')
         .then(x => x.json())
         .then(data => {
-            console.log(data)
             list.innerHTML = '';
             data.forEach(d => {
-                list.innerHTML +=
-                    `<div class="sameLine"><li class="flex-item" id= ${d.id}>${d.item}</li> 
-                    <button class="flex-item" onclick=Delete("${d.id}")>Delete</button></div>`
+                list.innerHTML += `<li class="flex-item" id="${d.id}">${d.item}</li>`;
             })
         })
 }
 update();
-
