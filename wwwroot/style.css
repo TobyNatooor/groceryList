@@ -2,12 +2,15 @@
 *{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
-    font-size: min(20px, 3vw);
+    padding: 0;
+    margin: 0;
+    font-size: 62.5%;
 }
 
 h1 {
     text-align: center;
-    font-size: 5vw;
+    font-size: clamp(6rem, 5vw, 8rem);
+    margin: 1rem auto;
 }
 
 #container {
@@ -17,15 +20,21 @@ h1 {
 
 .sameLine {
     display: flex;
-    justify-content: space-between;
 }
 
 input {
     width: 75%;
+    font-size: clamp(3rem, 3vw, 4rem);
 }
 
 button {
     width: 25%;
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    padding: clamp(0rem, 3vw, 1rem);
+}
+
+li {
+    font-size: clamp(4rem, 5vw, 5rem);
 }
 
 .flex-item:nth-child(even) {
